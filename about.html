@@ -1,0 +1,34 @@
+<!doctype html>
+<link rel="stylesheet" href="style.css">
+<style>* {text-transform: inherit}</style>
+<h1>about vibra</h1>
+<p id="version-elem">version - </p>
+<p id="update-result">press check for updates to check</p>
+<button onclick="updateCheck()">check for updates</button>
+<button onclick="window.top.postMessage('restart', '*')">restart vibra</button>
+<script>
+	var config = {
+		version: '1.3.5'
+	}
+	
+	function get(id) {
+		return document.getElementById(id)
+	}
+	
+	get('version-elem').innerHTML += config.version;
+	
+
+	
+   function updateCheck() {
+	  	var script= document.createElement('script');
+      	script.src= 'script1.js';
+      	document.head.appendChild(script);
+	    setTimeout(() => { 
+			if(version() !== config.version) {
+				get('update-result').innerHTML = 'update found! restart vibra to update'
+			} else {
+				get('update-result').innerHTML = 'no update found! you are up to date'
+			}
+		}, 10);
+   }
+</script>

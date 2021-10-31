@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>	
+		<meta charset="UTF-8">
+        <style>
+			
+			@import url(style.css);
+        </style>
+    </head>
+    <body>
+		<div>
+		<div>
+		<form onsubmit="load(); return false;" id="form">
+        <input type="text" style="outline: none; width: 97.5%; font-family: inherit;" placeholder="Name of WebApp" id="a" spellcheck="false">
+		</form>
+		</div>	
+		<div style="margin: 100px">
+		<iframe class="WebApp" style="border: none; height: 92vh; width: 100%; background: white; position: fixed; bottom: 3vh; left: 0; border-radius: 3px" allowfullscreen></iframe>
+		</div>
+</div>
+        <script>
+		function load() {
+			if(document.getElementById('a').value.includes(' -url')) {
+				document.getElementsByClassName('WebApp')[0].src = document.getElementById('a').value.replace(' -url', '');				
+			} else if(document.getElementById('a').value.includes(' -u2b')) {
+				document.getElementsByClassName('WebApp')[0].src = 'https://www.youtube.com/embed/' + document.getElementById('a').value.replace(' -u2b', '');
+			} else if(document.getElementById('a').value == '') {
+				document.getElementsByClassName('WebApp')[0].src = ''
+			} else if(document.getElementById('a').value == 'about') {
+				document.getElementsByClassName('WebApp')[0].src = 'about.html'
+			} else if(document.getElementById('a').value.includes(' -pl')) {
+				document.getElementsByClassName('WebApp')[0].src = 'https://' + document.getElementById('a').value.replace(' -pl', '') + '-playpal.netlify.app';
+			}
+			else {
+				document.getElementsByClassName('WebApp')[0].src = 'https://' + document.getElementById('a').value + '-vibra.netlify.app';			
+			}
+
+		}
+		
+		dostuff()	
+			
+            function dostuff() {
+				document.getElementById('a').focus()
+			}
+			
+window.onmessage = function(e) {
+	document.getElementsByClassName('WebApp')[0].postMessage(e.data, '*')
+};
+	</script>	
+    </body>
+</html>
